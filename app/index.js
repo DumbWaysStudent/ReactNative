@@ -1,5 +1,7 @@
 import React from 'react';
 import {View, Text} from 'react-native';
+import Glass from './components/Glass';
+import Cup from './components/Cup';
 
 export default class Index extends React.Component {
 
@@ -14,7 +16,8 @@ export default class Index extends React.Component {
   render(){
     return (
       <View>
-        <Text>Dumb Ways to Learn React Native</Text>
+        <Cup/>
+        <Glass/>
       </View>
     )
   }
