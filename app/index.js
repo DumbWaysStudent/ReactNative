@@ -1,23 +1,21 @@
 import React from 'react';
-import {View, Text} from 'react-native';
-import Glass from './components/Glass';
-import Cup from './components/Cup';
+import {View, Text, TouchableOpacity} from 'react-native';
 
 export default class Index extends React.Component {
 
-  componentWillMount(){
-    console.log('Component Will Mount');
-  }
-
-  componentDidMount(){
-    console.log('Component Did Mount');
+  handleClick(myName){
+    console.log('My name is ' + myName);
   }
 
   render(){
+    const myName = "Ega Wachid Radiegtya";
+
     return (
       <View>
-        <Cup/>
-        <Glass/>
+        <Text>Please Click Button Below</Text>
+        <TouchableOpacity onPress={()=> this.handleClick(myName)}>
+          <Text>Click</Text>
+        </TouchableOpacity>
       </View>
     )
   }
