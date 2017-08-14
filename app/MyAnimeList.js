@@ -1,5 +1,6 @@
 import React, {Component} from 'react';
-import {ListView, Text, View} from 'react-native';
+import { Container, Header, Content, List } from 'native-base';
+
 import Anime from './components/Anime';
 
 export default class MyAnimeList extends Component {
@@ -13,23 +14,22 @@ export default class MyAnimeList extends Component {
 
   constructor(){
     super();
-    const ds = new ListView.DataSource({rowHasChanged: (r1, r2) => r1 != r2});
-    this.state = {
-      dataSource: ds.cloneWithRows(this.animes)
-    }
+    // const ds = new ListView.DataSource({rowHasChanged: (r1, r2) => r1 != r2});
+    // this.state = {
+    //   dataSource: ds.cloneWithRows(this.animes)
+    // }
   }
 
   render(){
     return (
-      <View>
-        <Text>With DataSource:</Text>
-        <ListView
-          dataSource={this.state.dataSource}
-          renderRow={(rowData) => <Anime anime={rowData}/>}
-        />
-        <Text>With maps:</Text>
-        {this.animes.map((anime, key)=> <Text key={key}>{anime}</Text>)}
-      </View>
+      <Container>
+        <Header/>
+        <Content>
+          <List>
+            {this.animes.map((anime, key)=> <Anime key={key} anime={anime}/>)}
+          </List>
+        </Content>
+      </Container>
     )
   }
 }

@@ -1,7 +1,9 @@
 import React from 'react';
-import {View, Text} from 'react-native';
+import {ListItem, Text} from 'native-base';
 
 
 export default Anime = (props) => (
-  <Text>{props.anime}</Text>
+  <ListItem>
+    <Text>{props.anime}</Text>
+  </ListItem>
 );
