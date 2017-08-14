@@ -1,13 +1,14 @@
 import React from 'react';
 import {View, Text, TouchableOpacity, StyleSheet} from 'react-native';
-import MyAnimeList from './MyAnimeList';
+// import MyAnimeList from './MyAnimeList';
+import NativeBaseAnatomy from './components/NativeBaseAnatomy';
 
 export default class Index extends React.Component {
 
   render(){
     return (
       <View style={styles.container}>
-        <MyAnimeList/>
+        <NativeBaseAnatomy/>
       </View>
     )
   }
