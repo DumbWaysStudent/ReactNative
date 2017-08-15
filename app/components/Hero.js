@@ -1,8 +1,12 @@
 import React from 'react';
 import {ListItem, Thumbnail, Body, Text} from 'native-base';
 
-export default Hero = ({hero}) => (
-    <ListItem>
+export default Hero = ({hero, navigator}) => (
+    <ListItem
+      onPress={()=>navigator.push({
+        screen: 'push.HeroView'
+      })}
+    >
       <Thumbnail
         square
         size={80}
