@@ -12,18 +12,27 @@ Navigation.startTabBasedApp({
       screen: 'tab.Home', // this is a registered name for a screen
       title: 'Home',
       icon: require('../img/one.png'),
+      navigatorStyle: {
+        navBarHidden: true
+      }
     },
     {
       label: 'Heroes',
       screen: 'tab.Heroes',
       title: 'Heroes',
       icon: require('../img/one.png'),
+      navigatorStyle: {
+        navBarHidden: true
+      }
     },
     {
       label: 'Settings',
       screen: 'tab.Settings',
       title: 'Settings',
       icon: require('../img/one.png'),
+      navigatorStyle: {
+        navBarHidden: true
+      }
     },
   ]
 });
