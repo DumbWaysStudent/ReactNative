@@ -1,36 +1,29 @@
-import React from 'react';
-import {View, Text, TouchableOpacity, StyleSheet} from 'react-native';
-// import MyAnimeList from './MyAnimeList';
-import NativeBaseAnatomy from './components/NativeBaseAnatomy';
+import { Navigation } from 'react-native-navigation';
 
-export default class Index extends React.Component {
+import { registerScreens } from './screens';
 
-  render(){
-    return (
-      <View style={styles.container}>
-        <NativeBaseAnatomy/>
-      </View>
-    )
-  }
-}
+registerScreens(); // this is where you register all of your app's screens
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-  },
-  header: {
-    flex: 0.2,
-    backgroundColor: "green"
-  },
-  footer: {
-    flex: 3,
-    backgroundColor: "blue",
-    justifyContent: "center",
-  },
-  footerText: {
-    alignSelf: 'center',
-    color: '#FFF',
-    fontWeight: 'bold',
-    fontSize: 20
-  }
+// start the app
+Navigation.startTabBasedApp({
+  tabs: [
+    {
+      label: 'Home',
+      screen: 'tab.Home', // this is a registered name for a screen
+      title: 'Home',
+      icon: require('../img/one.png'),
+    },
+    {
+      label: 'Heroes',
+      screen: 'tab.Heroes',
+      title: 'Heroes',
+      icon: require('../img/one.png'),
+    },
+    {
+      label: 'Settings',
+      screen: 'tab.Settings',
+      title: 'Settings',
+      icon: require('../img/one.png'),
+    },
+  ]
 });

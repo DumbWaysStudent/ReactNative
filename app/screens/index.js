@@ -1,10 +1,12 @@
 import { Navigation } from 'react-native-navigation';
 
-import FirstTabScreen from './FirstTabScreen';
-import SecondTabScreen from './SecondTabScreen';
+import Home from './Home';
+import Heroes from './Heroes';
+import Settings from './Settings';
 
 // register all screens of the app (including internal ones)
 export function registerScreens() {
-  Navigation.registerComponent('example.FirstTabScreen', () => FirstTabScreen);
-  Navigation.registerComponent('example.SecondTabScreen', () => SecondTabScreen);
+  Navigation.registerComponent('tab.Home', () => Home);
+  Navigation.registerComponent('tab.Heroes', () => Heroes);
+  Navigation.registerComponent('tab.Settings', () => Settings);
 }

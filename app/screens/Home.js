@@ -1,10 +1,10 @@
 import React from 'react';
 import {Container, Content, Text} from 'native-base';
 
-export default FirstTabScreen = () => (
+export default Home = () => (
   <Container>
     <Content>
-      <Text>FirstTabScreen</Text>
+      <Text>Home</Text>
     </Content>
   </Container>
 )
