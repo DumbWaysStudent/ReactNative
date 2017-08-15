@@ -31,7 +31,7 @@ export default class Heroes extends Component {
           <Text>Heroes</Text>
         </Body>
         <Right>
-          <TouchableOpacity onPress={()=> this.props.navigator.push({screen: 'HeroView'})}>
+          <TouchableOpacity onPress={()=> this.props.navigator.push({screen: 'push.HeroAdd'})}>
             <Icon name="add" style={{color: '#62AFEF'}}/>
           </TouchableOpacity>
         </Right>
