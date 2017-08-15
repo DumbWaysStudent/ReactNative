@@ -1,10 +1,16 @@
 import React from 'react';
-import {Container, Content, Text} from 'native-base';
+import {Container, Content, Text, H3} from 'native-base';
 
 export default Settings = () => (
   <Container>
     <Content>
-      <Text>Settings</Text>
+      <H3 style={nbStyles.subtitle}>Settings</H3>
     </Content>
   </Container>
 )
+
+const nbStyles = {
+  subtitle: {
+    textAlign: "center"
+  }
+}
