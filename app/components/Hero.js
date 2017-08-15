@@ -10,7 +10,7 @@ export default Hero = ({hero}) => (
     />
     <Body>
       <Text>{hero.name}</Text>
-      <Text>{hero.title}</Text>
+      <Text note>{hero.title}</Text>
     </Body>
   </ListItem>
 )

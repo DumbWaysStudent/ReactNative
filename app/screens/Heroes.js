@@ -1,33 +1,52 @@
 import React, {Component} from 'react';
-import {Container, Content, Body, Text, List, ListItem, Thumbnail} from 'native-base';
+import {Container, Header, Left, Right, Content, Body, Text, List, ListItem, Thumbnail, Icon} from 'native-base';
+import {TouchableOpacity} from 'react-native';
+import axios from 'axios';
 import Hero from '../components/Hero';
 
 export default class Heroes extends Component {
 
-  heroes = [
-    {
-      name: "Eudora",
-      title: "Lightning Sorceress",
-      imageUri: "http://mobilelegendsbangbang.com/wp-content/uploads/2016/12/Hero151-1.jpg"
-    },
-    {
-      name: "Miya",
-      title: "Moonlight Archer",
-      imageUri: "https://vignette3.wikia.nocookie.net/mobile-legends/images/3/37/Miya.png/revision/latest?cb=20161127000022"
-    },
-    {
-      name: "Karina",
-      title: "Shadow Blade",
-      imageUri: "https://2.bp.blogspot.com/-L5F8nkA2nA0/WA48eGFoh1I/AAAAAAAAANU/JtXDztkafOE-GMv6NjgiQvUXJcPVz_rXwCPcB/s200/karina-mobile-legends-mobandroid-content.png"
+  constructor(){
+    super();
+    this.state = {
+      heroes: []
     }
-  ]
+  }
+
+  componentDidMount(){
+    const self = this;
+    axios.get('http://rest.learncode.academy/api/radiegtya/heroes').then((response)=>{
+      self.setState({heroes: response.data});
+    }).catch((error)=>{
+      console.log('something went wrong')
+      console.log(error)
+    })
+  }
+
+  renderHeader(){
+    return (
+      <Header>
+        <Left/>
+        <Body>
+          <Text>Heroes</Text>
+        </Body>
+        <Right>
+          <TouchableOpacity onPress={()=> this.props.navigator.push({screen: 'HeroView'})}>
+            <Icon name="add" style={{color: '#62AFEF'}}/>
+          </TouchableOpacity>
+        </Right>
+      </Header>
+    )
+  }
 
   render(){
     return (
       <Container>
         <Content>
+          {this.renderHeader()}
+
           <List>
-            {this.heroes.map((hero, key)=> <Hero key={key} hero={hero}/>)}
+            {this.state.heroes.map((hero, key)=> <Hero key={key} hero={hero}/>)}
           </List>
         </Content>
       </Container>
