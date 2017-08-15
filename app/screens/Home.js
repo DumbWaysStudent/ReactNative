@@ -1,7 +1,7 @@
 import React from 'react';
 import {Container, Content, Text, Thumbnail, Button} from 'native-base';
 
-export default Home = () => (
+export default Home = (props) => (
   <Container style={{justifyContent: "center", alignSelf: "center"}}>
     <Content>
       <Thumbnail
@@ -23,9 +23,16 @@ export default Home = () => (
         Your Favourites Heroes
       </Text>
 
-      <Button block style={nbStyles.btn}>
+      <Button
+        block
+        style={nbStyles.btn}
+        onPress={()=> props.navigator.switchToTab({
+          tabIndex: 1
+        })}
+      >
         <Text>Start</Text>
       </Button>
+
     </Content>
   </Container>
 )
