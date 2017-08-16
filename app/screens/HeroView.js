@@ -1,8 +1,8 @@
-import React, {Component} from 'react';
-import {Container, Content, Text, Header, Left, Body, Right, Icon} from 'native-base';
+import React, {Component, PropTypes} from 'react';
+import {Container, Content, Text, Header, Left, Body, Right, Icon, List, ListItem, Thumbnail} from 'native-base';
 import {TouchableOpacity} from 'react-native';
 
-export default class HeroView extends Component{
+class HeroView extends Component{
 
  static navigatorStyle = {
    navBarHidden: true,
@@ -26,14 +26,52 @@ export default class HeroView extends Component{
   }
 
   render(){
+    const {hero} = this.props;
+
     return (
       <Container>
         {this.renderHeader()}
 
         <Content>
-          <Text>HeroView</Text>
+        <List>
+          <ListItem>
+            <Thumbnail square size={80} source={{ uri: hero.imageUri }} />
+            <Body>
+              <Text>{hero.name}</Text>
+              <Text note>{hero.title}</Text>
+            </Body>
+          </ListItem>
+
+          <ListItem itemDivider>
+            <Text>Role</Text>
+          </ListItem>
+          <ListItem>
+            <Text>{hero.role}</Text>
+          </ListItem>
+
+          <ListItem itemDivider>
+            <Text>Speciality</Text>
+          </ListItem>
+          <ListItem>
+            <Text>{hero.speciality}</Text>
+          </ListItem>
+
+          <ListItem itemDivider>
+            <Text>Skills</Text>
+          </ListItem>
+          <ListItem>
+            <Text>...</Text>
+          </ListItem>
+
+        </List>
         </Content>
       </Container>
     )
   }
 }
+
+HeroView.propTypes = {
+  hero: PropTypes.object.isRequired
+};
+
+export default HeroView;

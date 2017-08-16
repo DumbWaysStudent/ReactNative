@@ -4,7 +4,10 @@ import {ListItem, Thumbnail, Body, Text} from 'native-base';
 export default Hero = ({hero, navigator}) => (
     <ListItem
       onPress={()=>navigator.push({
-        screen: 'push.HeroView'
+        screen: 'push.HeroView',
+        passProps: {
+          hero: hero
+        }
       })}
     >
       <Thumbnail
