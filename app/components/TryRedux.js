@@ -1,18 +1,31 @@
-import {createStore} from 'redux';
+import {createStore, combineReducers} from 'redux';
 
 //REDUCER
-const reducer = function(state, action){
-  if(action.type == "INC"){
-    return state + action.payload;
+const heroesReducer = function(state={}, action){
+  switch (action.type) {
+    case "SET_NAME":
+      state = {...state, name: action.payload};
+      break;
+    case "SET_ROLE":
+      state = {...state, role: action.payload};
+      break;
+    default:
   }
-  if(action.type == "DEC"){
-    return state - action.payload;
-  }
+
   return state;
 }
 
+const skillsReducer = function(state={}, action){
+  return state;
+}
+
+const reducers = combineReducers({
+  heroes: heroesReducer,
+  skills: skillsReducer
+});
+
 //STORE
-const store = createStore(reducer, 0);
+const store = createStore(reducers);
 
 //SUBSCRIPTION
 store.subscribe(()=>{
@@ -20,6 +33,5 @@ store.subscribe(()=>{
 })
 
 //DISPATCH
-store.dispatch({type: "INC", payload: 1});
-store.dispatch({type: "INC", payload: 10});
-store.dispatch({type: "DEC", payload: 11});
+store.dispatch({type: "SET_NAME", payload: "Eudora"});
+store.dispatch({type: "SET_ROLE", payload: "Mage"});
