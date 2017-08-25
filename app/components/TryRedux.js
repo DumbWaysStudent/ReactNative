@@ -1,43 +1,55 @@
 import {createStore, applyMiddleware} from 'redux';
+import {logger} from 'redux-logger';
+import thunk from 'redux-thunk';
+import axios from 'axios';
+import promise from 'redux-promise-middleware';
 
-const reducer = function(state, action){
-  if(action.type == "INC"){
-    state = state + action.payload;
-  }
 
-  if(action.type == "DEC"){
-    state = state - action.payload;
-  }
+const initialState = {
+  fetching: false,
+  fetched: false,
+  error: null,
+  heroes: []
+};
 
-  if(action.type == "ERR"){
-    throw new Error('ERRORRRR');
+const reducer = function(state=initialState, action){
+  switch (action.type) {
+    case 'FETCH_HEROES_PENDING':
+      return {...state, fetching: true};
+      break;
+    case 'FETCH_HEROES_FULFILLED':
+      return {...state, fetching: false, fetched: true, heroes: action.payload};
+      break;
+    case 'FETCH_HEROES_REJECTED':
+      return {...state, fetching: false, error: action.payload};
+      break;
+    default:
+
   }
 
   return state;
-
 }
 
-const logger = (store)=>(next)=>(action)=>{
-  console.log('logger middleware called');
-  next(action);
-}
+const middleware = applyMiddleware(logger, thunk, promise());
 
-const error = (store)=>(next)=>(action)=>{
-  try {
-    next(action);
-  } catch (e) {
-    console.log('ERROR MIDDLEWARE CALLED');
-  }
-}
-
-const middleware = applyMiddleware(logger);
-
-const store = createStore(reducer, 0, middleware);
+const store = createStore(reducer, middleware);
 
 store.subscribe(()=>{
-  console.log('current state',  store.getState());
-});
+  console.log('current state = ', store.getState());
+})
 
-store.dispatch({type: "INC",  payload: 1});
-store.dispatch({type: "ERR"});
-store.dispatch({type: "INC",  payload: 1});
+
+store.dispatch({
+  type: 'FETCH_HEROES',
+  payload: axios.get('http://rest.learncodexx.academy/api/radiegtya/heroes')
+})
+// store.dispatch((dispatch)=> {
+//   dispatch({type: 'FETCH_HEROES_PENDING'});
+//   axios.get('http://rest.learncodexxx.academy/api/radiegtya/heroes')
+//     .then((response)=>{
+//       dispatch({type: 'FETCH_HEROES_FULFILLED', payload: response.data});
+//     })
+//     .catch((err)=> {
+//       dispatch({type: 'FETCH_HEROES_REJECTED', payload: err});
+//     })
+// });
