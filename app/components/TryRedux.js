@@ -1,37 +1,43 @@
-import {createStore, combineReducers} from 'redux';
+import {createStore, applyMiddleware} from 'redux';
 
-//REDUCER
-const heroesReducer = function(state={}, action){
-  switch (action.type) {
-    case "SET_NAME":
-      state = {...state, name: action.payload};
-      break;
-    case "SET_ROLE":
-      state = {...state, role: action.payload};
-      break;
-    default:
+const reducer = function(state, action){
+  if(action.type == "INC"){
+    state = state + action.payload;
+  }
+
+  if(action.type == "DEC"){
+    state = state - action.payload;
+  }
+
+  if(action.type == "ERR"){
+    throw new Error('ERRORRRR');
   }
 
   return state;
+
 }
 
-const skillsReducer = function(state={}, action){
-  return state;
+const logger = (store)=>(next)=>(action)=>{
+  console.log('logger middleware called');
+  next(action);
 }
 
-const reducers = combineReducers({
-  heroes: heroesReducer,
-  skills: skillsReducer
+const error = (store)=>(next)=>(action)=>{
+  try {
+    next(action);
+  } catch (e) {
+    console.log('ERROR MIDDLEWARE CALLED');
+  }
+}
+
+const middleware = applyMiddleware(logger);
+
+const store = createStore(reducer, 0, middleware);
+
+store.subscribe(()=>{
+  console.log('current state',  store.getState());
 });
 
-//STORE
-const store = createStore(reducers);
-
-//SUBSCRIPTION
-store.subscribe(()=>{
-  console.log('store changed',  store.getState());
-})
-
-//DISPATCH
-store.dispatch({type: "SET_NAME", payload: "Eudora"});
-store.dispatch({type: "SET_ROLE", payload: "Mage"});
+store.dispatch({type: "INC",  payload: 1});
+store.dispatch({type: "ERR"});
+store.dispatch({type: "INC",  payload: 1});
