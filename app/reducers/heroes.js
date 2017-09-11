@@ -11,7 +11,7 @@ const reducer = function(state=initialState, action){
       return {...state, fetching: true};
       break;
     case 'FETCH_HEROES_FULFILLED':
-      return {...state, fetching: false, fetched: true, heroes: action.payload};
+      return {...state, fetching: false, fetched: true, heroes: action.payload.data};
       break;
     case 'FETCH_HEROES_REJECTED':
       return {...state, fetching: false, error: action.payload};

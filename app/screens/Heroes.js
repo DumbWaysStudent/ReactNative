@@ -14,13 +14,7 @@ export default class Heroes extends Component {
   }
 
   componentDidMount(){
-    const self = this;
-    axios.get('http://rest.learncode.academy/api/radiegtya/heroes').then((response)=>{
-      self.setState({heroes: response.data});
-    }).catch((error)=>{
-      console.log('something went wrong')
-      console.log(error)
-    })
+    this.props.fetchHeroes();
   }
 
   renderHeader(){
@@ -40,15 +34,21 @@ export default class Heroes extends Component {
   }
 
   render(){
+    if(this.props.data.fetching){
+      return (
+        <Content>
+          <Text>Loading...</Text>
+        </Content>
+      )
+    }
+
     return (
       <Container>
         <Content>
           {this.renderHeader()}
 
-          <Text>{this.props.data}</Text>
-
           <List>
-            {this.state.heroes.map((hero, key)=> <Hero key={key} hero={hero} {...this.props}/>)}
+            {this.props.data.heroes.map((hero, key)=> <Hero key={key} hero={hero} {...this.props}/>)}
           </List>
 
         </Content>
