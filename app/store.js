@@ -6,4 +6,6 @@ import heroesReducer from './reducers/heroes';
 
 const middleware = applyMiddleware(logger, thunk, promise());
 
-const store = createStore(reducer, middleware);
+const store = createStore(heroesReducer, middleware);
+
+export default store;

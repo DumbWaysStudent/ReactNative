@@ -45,6 +45,8 @@ export default class Heroes extends Component {
         <Content>
           {this.renderHeader()}
 
+          <Text>{this.props.data}</Text>
+
           <List>
             {this.state.heroes.map((hero, key)=> <Hero key={key} hero={hero} {...this.props}/>)}
           </List>
