@@ -41,7 +41,7 @@ store.subscribe(()=>{
 
 store.dispatch({
   type: 'FETCH_HEROES',
-  payload: axios.get('http://rest.learncodexx.academy/api/radiegtya/heroes')
+  payload: axios.get('http://rest.learncode.academy/api/radiegtya/heroes')
 })
 // store.dispatch((dispatch)=> {
 //   dispatch({type: 'FETCH_HEROES_PENDING'});
