@@ -37,6 +37,16 @@ class HeroView extends Component{
       });
   }
 
+  handleGoToEdit(id){
+    this.props.navigator.push({
+      screen: 'push.HeroEdit',
+      title: "Edit Hero",
+      passProps: {
+        id
+      }
+    })
+  }
+
   render(){
     const {hero} = this.props;
 
@@ -51,6 +61,9 @@ class HeroView extends Component{
             <Body>
               <Text>{hero.name}</Text>
               <Text note>{hero.title}</Text>
+              <TouchableOpacity onPress={()=> this.handleGoToEdit(hero.id)}>
+                <Text style={{color: '#41B0F5'}}>Edit</Text>
+              </TouchableOpacity>
             </Body>
           </ListItem>
 
