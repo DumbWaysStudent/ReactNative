@@ -1,6 +1,10 @@
 import React, {Component, PropTypes} from 'react';
-import {Container, Content, Text, Header, Left, Body, Right, Icon, List, ListItem, Thumbnail} from 'native-base';
+import {Container, Content, Text, Header, Left, Body, Right, Icon, List, ListItem, Thumbnail, Button} from 'native-base';
 import {TouchableOpacity} from 'react-native';
+import axios from 'axios';
+import {connect} from 'react-redux';
+
+import {fetchHeroes} from '../actions/heroes';
 
 class HeroView extends Component{
 
@@ -23,6 +27,14 @@ class HeroView extends Component{
         <Right/>
       </Header>
     )
+  }
+
+  handleDelete(id){
+    axios.delete(`http://rest.learncode.academy/api/radiegtya/heroes/${id}`)
+      .then(()=>{
+        this.props.dispatch(fetchHeroes());
+        this.props.navigator.pop();
+      });
   }
 
   render(){
@@ -64,6 +76,10 @@ class HeroView extends Component{
           </ListItem>
 
         </List>
+
+        <Button full danger onPress={()=>this.handleDelete(hero.id)}>
+          <Text>Delete</Text>
+        </Button>
         </Content>
       </Container>
     )
@@ -74,4 +90,8 @@ HeroView.propTypes = {
   hero: PropTypes.object.isRequired
 };
 
-export default HeroView;
+const mapStateToProps = (state)=> ({
+
+});
+
+export default connect(mapStateToProps)(HeroView);
