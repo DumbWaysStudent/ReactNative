@@ -15,6 +15,6 @@ export function registerScreens(store, Provider) {
   Navigation.registerComponent('tab.Home', () => Home);
   Navigation.registerComponent('tab.Heroes', () => Heroes, store, Provider);
   Navigation.registerComponent('tab.Settings', () => Settings);
-  Navigation.registerComponent('push.HeroAdd', () => HeroAdd);
+  Navigation.registerComponent('push.HeroAdd', () => HeroAdd, store, Provider);
   Navigation.registerComponent('push.HeroView', () => HeroView);
 }

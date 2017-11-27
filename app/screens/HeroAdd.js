@@ -2,8 +2,11 @@ import React, {Component} from 'react';
 import {Container, Header, Body, Left, Right, Content, Text, Icon, Form, Label, Input, Item} from 'native-base';
 import {TouchableOpacity} from 'react-native';
 import axios from 'axios';
+import {connect} from 'react-redux';
 
-export default class HeroAdd extends Component {
+import {fetchHeroes} from '../actions/heroes';
+
+class HeroAdd extends Component {
 
   static navigatorStyle = {
     navBarHidden: true,
@@ -29,6 +32,7 @@ export default class HeroAdd extends Component {
       url: 'http://rest.learncode.academy/api/radiegtya/heroes',
       data: this.state
     }).then(()=>{
+      self.props.dispatch(fetchHeroes());
       self.props.navigator.pop();
     });
   }
@@ -127,3 +131,9 @@ export default class HeroAdd extends Component {
   }
 
 }
+
+const mapStateToProps = (state)=> ({
+  
+});
+
+export default connect(mapStateToProps)(HeroAdd)
